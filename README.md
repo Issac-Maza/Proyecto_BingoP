@@ -97,4 +97,4 @@ Una vez dentro de la carpeta, dirijase a la barra de direcion, borre el contenid
 Ejecute los siguientes comandos
 ```bash
 pip install streamlit
-python app.py
+python -m streamlit run app.py
