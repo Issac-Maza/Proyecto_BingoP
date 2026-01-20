@@ -94,6 +94,7 @@ El sistema marca automáticamente las coincidencias y determina si algún cartó
 ### 3. Ejecutar el programa
 Descargue el proyecto y descomprima el proyecto
 Una vez dentro de la carpeta, dirijase a la barra de direcion, borre el contenido y escriba: CMD
-Ejecute el siguiente comando
+Ejecute los siguientes comandos
 ```bash
+pip install streamlit
 python app.py
