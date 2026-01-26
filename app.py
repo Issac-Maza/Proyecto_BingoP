@@ -387,7 +387,12 @@ else:
                  game.cantar_palabra(man_input)
                  st.rerun()
 
+        
         st.caption(f"Palabras restantes en tómbola: {restantes}")
+        
+        if restantes == 0 and not game.juego_terminado:
+             st.error("🚫 ¡Se acabaron las palabras de la tómbola y no hubo ganadores!")
+
         with st.expander("📜 Historial de esta ronda"):
             st.write(", ".join(game.palabras_cantadas[::-1]))
 
