@@ -117,22 +117,16 @@ REPOSITORIO_MASTER = {
 class Carton:
     def __init__(self, raw_line, nombre_jugador_default="Desconocido"):
         linea_limpia = raw_line.strip()
-        
-        # --- LÓGICA DE DETECCIÓN DE FORMATO ---
-        
-        # CASO 1: FORMATO DOCENTE (CSV con comas)
-        # Formato: SP000000,Luis,La tortuga sabia...
+
         if ',' in linea_limpia:
             partes = linea_limpia.split(',')
             
-            # Verificamos que tenga al menos 3 partes (ID, Nombre, Frase)
+
             if len(partes) >= 3:
                 self.id = partes[0].strip()
-                # Aquí capturamos el nombre que viene DENTRO del archivo
+
                 self.nombre_jugador = partes[1].strip()
-                
-                # La frase está en la posición 2. 
-                # Quitamos puntos finales y separamos por espacios.
+
                 frase = partes[2].strip().replace('.', '')
                 palabras_raw = frase.split()
             else:
@@ -140,28 +134,24 @@ class Carton:
                 self.nombre_jugador = "Error"
                 palabras_raw = []
 
-        # CASO 2: TU FORMATO ACTUAL (Espacios)
-        # Formato: SP-BKT... PALABRA1 PALABRA2
         else:
             partes = linea_limpia.split()
             self.id = partes[0].strip()
-            # Usamos el nombre que viene del input manual o nombre de archivo
+
             self.nombre_jugador = nombre_jugador_default
             palabras_raw = partes[1:]
 
-        # --- NORMALIZACIÓN (Común para ambos) ---
-        
-        # 1. Detectar idioma (funciona igual: SP00... o SP-BK... ambos empiezan con SP)
+
         self.idioma = self.id[:2].upper()
         
-        # 2. Convertir todo a MAYÚSCULAS (resuelve tu duda de minúsculas)
+  
         self.palabras_lista = [p.upper() for p in palabras_raw]
         
-        # 3. Crear Set para búsqueda rápida O(1)
+
         self.palabras_set = set(self.palabras_lista)
         self.marcadas = set()
         
-        # CONFIGURACIÓN (Se mantiene igual)
+
         self.config = {
             'SP': {'filas': 5, 'cols': 5, 'libre': True, 'max_total': 24},
             'EN': {'filas': 3, 'cols': 5, 'libre': True, 'max_total': 14},
