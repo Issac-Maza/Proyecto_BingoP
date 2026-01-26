@@ -188,23 +188,26 @@ class BingoGame:
         self.jugadores_unicos = set()
         self.ids_registrados = set() # ¡NUEVO! Evita duplicados
 
-    def agregar_cartones(self, contenido_archivo, nombre_jugador):
+    def agregar_cartones(self, contenido_archivo, nombre_jugador_externo):
         nuevos = []
         errores = 0
         duplicados = 0
-        
-        self.jugadores_unicos.add(nombre_jugador)
+
 
         for linea in contenido_archivo:
             if linea.strip():
                 try:
-                    c = Carton(linea, nombre_jugador)
-                    # 1. Validar idioma
-                    if c.idioma in REPOSITORIO_MASTER:
-                        # 2. Validar que el ID no exista previamente
+                    c = Carton(linea, nombre_jugador_externo)
+                    
+                    if c.idioma in REPOSITORIO_MASTER or True:
+                        
+                        
                         if c.id not in self.ids_registrados:
                             nuevos.append(c)
                             self.ids_registrados.add(c.id)
+                            self.jugadores_unicos.add(c.nombre_jugador) 
+                            # ------------------------
+                            
                         else:
                             duplicados += 1
                     else:
@@ -214,6 +217,7 @@ class BingoGame:
         
         self.cartones.extend(nuevos)
         self.recalcular_rondas()
+        # Retornamos 3 valores para control interno
         # Retornamos 3 valores para control interno
         return len(nuevos), errores, duplicados
 
