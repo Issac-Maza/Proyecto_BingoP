@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # ==============================================================================
-# 1. REPOSITORIO MAESTRO
+# 1. REPOSITORIO MAESTRO-DESAROLLADO POR Paul Alberto Alcivar Zavala
 # ==============================================================================
 REPOSITORIO_MASTER = {
     'SP': [
